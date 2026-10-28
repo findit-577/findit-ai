@@ -2,57 +2,321 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FINDIT AI | 나에게 맞는 AI 도구 찾기</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f7fb;
-      text-align: center;
-      color: #172033;
-    }
-    header {
-      background: #202b55;
-      color: white;
-      padding: 60px 20px;
-    }
-    h1 { font-size: 42px; }
-    main { padding: 35px 20px; }
-    .card {
-      background: white;
-      max-width: 450px;
-      margin: 20px auto;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 18px #00000012;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FINDIT AI | 나에게 맞는 AI 도구 찾기</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, "Malgun Gothic", sans-serif;
+  background: #f5f7fc;
+  color: #17243d;
+}
+header {
+  background: #17264b;
+  color: white;
+  padding: 22px 6%;
+}
+nav {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo { font-size: 24px; font-weight: bold; }
+nav span { font-size: 13px; color: #c4d1ed; }
+.hero {
+  text-align: center;
+  padding: 65px 20px;
+  background: linear-gradient(135deg,#17264b,#394da1);
+  color: white;
+}
+.hero h1 { font-size: clamp(27px,5vw,42px); }
+.hero p { color: #d9e1ff; }
+.search {
+  width: min(95%,550px);
+  padding: 17px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  margin-top: 20px;
+}
+main { max-width: 1100px; margin: 35px auto; padding: 0 20px; }
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 24px 0;
+}
+button {
+  cursor: pointer;
+  border: 1px solid #d5dbea;
+  border-radius: 10px;
+  padding: 11px 17px;
+  background: white;
+  font-weight: bold;
+}
+button.active, .primary {
+  background: #4059d7;
+  color: white;
+  border-color: #4059d7;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(255px,1fr));
+  gap: 18px;
+}
+.card {
+  background: white;
+  border: 1px solid #e5eaf3;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px #17264b0b;
+}
+.card h3 { margin-bottom: 7px; }
+.tag { color: #4059d7; font-size: 13px; font-weight: bold; }
+.desc { color: #64718a; line-height: 1.7; min-height: 75px; }
+.card a {
+  display: inline-block;
+  background: #17264b;
+  color: white;
+  text-decoration: none;
+  padding: 11px 14px;
+  border-radius: 9px;
+  margin-top: 12px;
+}
+.compare {
+  margin-top: 30px;
+  padding: 24px;
+  background: white;
+  border-radius: 16px;
+}
+.compare-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+.compare-item {
+  flex: 1;
+  min-width: 200px;
+  padding: 18px;
+  background: #f1f4ff;
+  border-radius: 12px;
+}
+.notice { color: #69758c; font-size: 13px; line-height: 1.7; }
+footer {
+  text-align: center;
+  padding: 35px 20px;
+  color: #68748b;
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>FINDIT AI</h1>
-    <p>나에게 딱 맞는 AI 프로그램을 찾아보세요.</p>
-  </header>
 
-  <main>
-    <h2>어떤 AI 도구가 필요하세요?</h2>
+<header>
+  <nav>
+    <div class="logo">FINDIT AI</div>
+    <span>AI 소프트웨어 비교 플랫폼</span>
+  </nav>
+</header>
 
-    <div class="card">
-      <h3>AI 글쓰기</h3>
-      <p>글쓰기와 업무를 도와주는 AI 도구</p>
+<section class="hero">
+  <h1>나에게 맞는 AI 도구를 찾아보세요</h1>
+  <p>수많은 AI 프로그램, 이제 한곳에서 비교하세요.</p>
+  <input class="search" id="search"
+    placeholder="프로그램 이름이나 기능 검색...">
+</section>
+
+<main>
+  <h2>AI 프로그램 탐색</h2>
+  <p class="notice">관심 있는 프로그램을 선택해 기능을 비교해 보세요.</p>
+
+  <div class="filters" id="filters"></div>
+  <p id="count"></p>
+  <div class="grid" id="cards"></div>
+
+  <section class="compare">
+    <h2>프로그램 비교</h2>
+    <p class="notice">프로그램 카드에서 최대 2개를 선택하세요.</p>
+    <div class="compare-list" id="compareList">
+      아직 선택한 프로그램이 없습니다.
     </div>
+  </section>
 
-    <div class="card">
-      <h3>AI 이미지 제작</h3>
-      <p>디자인과 이미지 제작을 위한 AI 도구</p>
-    </div>
+  <section class="compare">
+    <h2>FINDIT AI 소개</h2>
+    <p>
+      FINDIT AI는 다양한 소프트웨어를
+      목적에 맞게 탐색하고 비교할 수 있도록 돕습니다.
+    </p>
+    <p class="notice">
+      실제 가격, 무료 플랜, 기능은 변경될 수 있습니다.
+      구매 전 반드시 공식 사이트에서 확인해 주세요.
+    </p>
+  </section>
+</main>
 
-    <div class="card">
-      <h3>AI 영상 편집</h3>
-      <p>영상 제작 시간을 줄여주는 AI 도구</p>
-    </div>
-  </main>
+<footer>
+  FINDIT AI · 소프트웨어 탐색 및 비교 서비스
+</footer>
+
+<script>
+const tools = [
+  {
+    name: "ChatGPT",
+    category: "글쓰기",
+    desc: "글쓰기, 아이디어 정리, 질문 답변, 업무 보조에 활용하는 AI 도구.",
+    feature: "대화형 AI, 글쓰기, 정보 정리",
+    url: "https://chatgpt.com/"
+  },
+  {
+    name: "Claude",
+    category: "글쓰기",
+    desc: "문서 분석, 긴 글 작성, 프로그래밍 업무 등에 활용하는 AI 도구.",
+    feature: "문서 분석, 글쓰기, 코딩",
+    url: "https://claude.ai/"
+  },
+  {
+    name: "Canva",
+    category: "디자인",
+    desc: "SNS 이미지, 발표자료, 포스터 등을 제작하는 디자인 플랫폼.",
+    feature: "디자인 템플릿, AI 디자인 기능",
+    url: "https://www.canva.com/"
+  },
+  {
+    name: "Adobe Firefly",
+    category: "디자인",
+    desc: "이미지 생성과 편집 등 창작 작업에 활용하는 생성형 AI 서비스.",
+    feature: "이미지 생성, 창작 보조",
+    url: "https://firefly.adobe.com/"
+  },
+  {
+    name: "Runway",
+    category: "영상",
+    desc: "AI를 활용한 영상 생성과 영상 관련 창작 작업을 지원하는 서비스.",
+    feature: "AI 영상 생성, 영상 창작",
+    url: "https://runwayml.com/"
+  },
+  {
+    name: "Notion",
+    category: "생산성",
+    desc: "메모, 업무 관리, 문서 협업과 AI 보조 기능을 제공하는 플랫폼.",
+    feature: "문서 관리, 협업, AI 업무 보조",
+    url: "https://www.notion.so/"
+  }
+];
+
+let currentCategory = "전체";
+let selected = [];
+
+const cards = document.getElementById("cards");
+const filters = document.getElementById("filters");
+const compareList = document.getElementById("compareList");
+
+const categories = ["전체","글쓰기","디자인","영상","생산성"];
+
+function renderFilters() {
+  filters.innerHTML = "";
+  categories.forEach(category => {
+    const btn = document.createElement("button");
+    btn.textContent = category;
+    btn.className = currentCategory === category ? "active" : "";
+    btn.onclick = () => {
+      currentCategory = category;
+      renderFilters();
+      renderCards();
+    };
+    filters.appendChild(btn);
+  });
+}
+
+function toggleCompare(index) {
+  if (selected.includes(index)) {
+    selected = selected.filter(n => n !== index);
+  } else {
+    if (selected.length >= 2) {
+      alert("최대 2개까지 비교할 수 있어요.");
+      return;
+    }
+    selected.push(index);
+  }
+  renderCards();
+  renderCompare();
+}
+
+function renderCards() {
+  const query = document.getElementById("search")
+    .value.trim().toLowerCase();
+  cards.innerHTML = "";
+
+  const filtered = tools
+    .map((tool,index) => ({tool,index}))
+    .filter(({tool}) =>
+      (currentCategory === "전체" ||
+       tool.category === currentCategory) &&
+      [tool.name,tool.desc,tool.feature,tool.category]
+        .join(" ").toLowerCase().includes(query)
+    );
+
+  document.getElementById("count").textContent =
+    filtered.length + "개의 프로그램";
+
+  filtered.forEach(({tool,index}) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <span class="tag">${tool.category}</span>
+      <h3>${tool.name}</h3>
+      <p class="desc">${tool.desc}</p>
+      <p><strong>주요 기능</strong><br>${tool.feature}</p>
+    `;
+
+    const button = document.createElement("button");
+    button.textContent = selected.includes(index)
+      ? "비교에서 제외" : "비교하기";
+    button.className = selected.includes(index) ? "primary" : "";
+    button.onclick = () => toggleCompare(index);
+    card.appendChild(button);
+
+    const link = document.createElement("a");
+    link.href = tool.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "공식 사이트";
+    card.appendChild(link);
+    cards.appendChild(card);
+  });
+}
+
+function renderCompare() {
+  compareList.innerHTML = "";
+
+  if (selected.length === 0) {
+    compareList.textContent = "아직 선택한 프로그램이 없습니다.";
+    return;
+  }
+
+  selected.forEach(index => {
+    const tool = tools[index];
+    const item = document.createElement("div");
+    item.className = "compare-item";
+    item.innerHTML = `
+      <h3>${tool.name}</h3>
+      <p>${tool.desc}</p>
+      <strong>주요 기능</strong>
+      <p>${tool.feature}</p>
+    `;
+    compareList.appendChild(item);
+  });
+}
+
+document.getElementById("search").addEventListener("input",renderCards);
+renderFilters();
+renderCards();
+renderCompare();
+</script>
 </body>
 </html>

@@ -9,6 +9,14 @@
   <style>
     *{box-sizing:border-box}body{margin:0;background:#f3f6fc;color:#17243c;font-family:Arial,'Malgun Gothic',sans-serif;line-height:1.6}header{background:#17264b;color:#fff;padding:20px 6%}nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}.logo{font-size:24px;font-weight:800}nav small{color:#ccd8f3}.hero{padding:52px 20px;text-align:center;color:#fff;background:linear-gradient(120deg,#17264b,#3d55b3)}h1{font-size:clamp(26px,4vw,40px);margin:0 0 10px}.hero p{margin:0 0 20px;color:#dfE7ff}input{font:inherit}.search{display:block;margin:0 auto;width:min(100%,560px);border:0;border-radius:12px;padding:16px}main{max-width:1100px;padding:24px 18px;margin:auto}.panel{background:#fff;border:1px solid #e1e7f3;border-radius:18px;padding:23px;margin:18px 0}.filters,.actions{display:flex;gap:8px;flex-wrap:wrap}button,.link{border:1px solid #d3dbed;background:#fff;border-radius:9px;padding:10px 13px;cursor:pointer;font:inherit;font-weight:700;color:#17243c;text-decoration:none}button.active,.primary{background:#4059d7;color:white;border-color:#4059d7}.link{display:inline-block;background:#17264b;color:#fff;border:0}.muted{color:#64738a}.small{font-size:13px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}.card{background:#fff;border:1px solid #e2e8f3;border-radius:16px;padding:21px;display:flex;flex-direction:column;gap:9px}.card h3{margin:0}.tag{font-size:13px;font-weight:700;color:#4059d7}.card p{margin:0}.card .actions{margin-top:auto;padding-top:10px}ul{margin:4px 0 10px;padding-left:20px}.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}.compare-box{background:#f3f6fc;border-radius:12px;padding:16px}.notice{background:#eef2fc;padding:14px;border-radius:10px}.status{margin:14px 0}footer{text-align:center;color:#67758c;padding:32px 20px}@media(max-width:500px){nav small{display:none}}
   </style>
+  <style>
+    .trust-section{max-width:1100px;margin:28px auto;padding:0 20px}
+    .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .trust-card{background:#fff;border:1px solid #dfe6f5;border-radius:16px;padding:24px}
+    .trust-card h2{font-size:20px;margin:0 0 12px}
+    .trust-card p,.trust-card li{color:#53617a;line-height:1.8;font-size:14px}
+    .trust-card ul{padding-left:20px;margin:8px 0}
+  </style>
 </head>
 <body>
 <header><nav><div class="logo">FINDIT AI</div><small>AI 소프트웨어 탐색 · 비교 · 추천</small></nav></header>
@@ -26,7 +34,32 @@
   <div id="cards" class="grid"></div>
   <section class="panel"><h2>프로그램 2개 비교</h2><p class="muted">카드에서 비교하기를 누르면 두 가지를 나란히 볼 수 있어요.</p><div id="compare" class="compare-grid" aria-live="polite">아직 선택한 프로그램이 없습니다.</div></section>
   <section class="panel"><h2>사이트 소개 및 안내</h2><p>FINDIT AI는 프로그램을 탐색하고 기능을 비교하기 위한 정보 사이트입니다. 현재는 초기 테스트 버전이며, 추천 결과는 실제 사용 테스트를 대체하지 않습니다.</p><p class="notice small">가격·무료 플랜 제공 범위와 기능은 국가, 결제 기간 및 시점에 따라 달라질 수 있습니다. 구매 전 반드시 공식 사이트의 최신 정보를 확인하세요. 현재 이 페이지의 외부 링크는 일반 공식 사이트 링크이며, 제휴 추적 링크가 아닙니다.</p></section>
-</main><footer>FINDIT AI · 초기 테스트 버전</footer>
+  <section class="trust-section" aria-label="사이트 운영 및 제휴 안내">
+    <div class="trust-grid">
+      <article class="trust-card">
+        <h2>어떻게 비교하나요?</h2>
+        <p>FINDIT AI는 프로그램의 주요 기능, 무료 이용 가능 여부, 추천 대상, 사용 시 주의할 점을 정리합니다.</p>
+        <ul>
+          <li>추천 기능은 현재 정해진 카테고리를 활용한 규칙 기반 기능입니다.</li>
+          <li>표시된 정보는 참고용이며 최신 요금과 이용 조건은 공식 사이트에서 확인해야 합니다.</li>
+          <li>실제 직접 사용해 검증한 결과와 단순 공개 정보 요약은 앞으로 구분해 표시할 예정입니다.</li>
+        </ul>
+      </article>
+      <article class="trust-card">
+        <h2>광고·제휴 안내</h2>
+        <p>현재 사이트의 '공식 사이트' 버튼은 일반 링크이며, 이 페이지에 수익이 발생하는 제휴 링크는 아직 연결되어 있지 않습니다.</p>
+        <p>향후 제휴 링크를 도입하면 해당 링크와 수수료 발생 가능성을 이용자가 알아볼 수 있게 안내하겠습니다. 제휴 여부가 비교 결과를 좌우하지 않도록 운영하는 것을 목표로 합니다.</p>
+      </article>
+      <article class="trust-card">
+        <h2>운영 정보</h2>
+        <p>서비스명: FINDIT AI</p>
+        <p>서비스 상태: 공개 테스트 버전</p>
+        <p>문의 채널: 준비 중 — 공식 연락 방법을 확정하면 이곳에 안내하겠습니다.</p>
+        <p>방문자의 파일이나 계정 정보를 업로드하도록 요구하지 않는 정적 소개·비교 페이지입니다.</p>
+      </article>
+    </div>
+  </section>
+</main><footer>FINDIT AI · 공개 테스트 버전 3.1</footer>
 <script>
 const tools=[
  {name:'ChatGPT',category:'글쓰기',free:'무료 이용 방식 제공 (조건 확인)',features:'대화형 AI, 글쓰기, 정보 정리',audience:'질문 답변과 글쓰기 도움을 원하는 사람',good:'다양한 작업을 자연어로 요청하기 편리함',caution:'답변의 사실관계를 확인해야 함',url:'https://chatgpt.com/'},
